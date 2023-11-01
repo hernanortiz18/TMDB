@@ -6,6 +6,12 @@ class User extends S.Model {
   hash(password, salt) {
     return bcrypt.hash(password, salt);
   }
+
+  passwordValidate(password) {
+    return this.hash(password, this.salt)
+      .then((hash) => hash === this.password)
+      .catch((Error) => console.log(Error));
+  }
 }
 
 User.init(
