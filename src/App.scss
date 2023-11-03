@@ -5,6 +5,41 @@
   text-align: center;
   background-color: #000;
 }
+.gridCard {
+  width: 100vw;
+  margin-top: 25px;
+  padding-top: 35px;
+  background: linear-gradient(#000, #101);
+  border-radius: 17px;
+  .movieCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+
+    img {
+      min-width: 130px;
+      border-radius: 900px;
+    }
+    h3 {
+      font-size: 1.5em;
+    }
+  }
+}
+
+.gridCard:hover {
+  :hover {
+    img {
+      border-radius: 900px 900px 100px 100px;
+      scale: 1.1;
+      transition: all 0.8s;
+    }
+    h3 {
+      text-shadow: #ddf 2px 0 10px;
+      transition: 0.5s;
+    }
+  }
+}
 
 .formComponent {
   background-color: #333;
