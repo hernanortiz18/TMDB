@@ -1,5 +1,12 @@
+import Movies from "./Movies";
+import Navbar from "./Navbar";
+
 const Home = () => {
-  return <p>Home</p>;
+  return (
+    <div>
+      <Navbar />
+    </div>
+  );
 };
 
 export default Home;

@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Slick from "../commons/Slick";
 
 const Movies = () => {
-  const [data, setData] = useState({});
+  const [data, setData] = useState([]);
 
   const options = {
     params: { language: "en-US", page: "1" },
@@ -18,13 +19,18 @@ const Movies = () => {
       .get("https://api.themoviedb.org/3/movie/popular", options)
       .then(function (response) {
         console.log(response.data);
+        setData(response.data.results);
       })
       .catch(function (error) {
         console.error(error);
       });
-  });
+  }, []);
 
-  return <>{data[0]}</>;
+  return (
+    <>
+      <Slick items={data} />
+    </>
+  );
 };
 
 export default Movies;

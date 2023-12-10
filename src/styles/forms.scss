@@ -1,0 +1,33 @@
+.vista-register {
+  display: flex;
+  background: url("../assets/background-start.jpg");
+  background-size: cover;
+  height: 100vh;
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #fafafa;
+    width: 300px;
+    padding: 20px;
+    border: solid 2px #95000e;
+
+    align-items: center;
+    justify-content: center;
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+}
+
+.registerButton {
+  margin: 5px 5px 5px 200px;
+  color: #a59df0;
+}
+.registerButton:hover {
+  border: solid 1px #95000e;
+  transition: 0.5s;
+  color: #95000e;
+}
