@@ -4,8 +4,9 @@ import { withStyles } from "@material-ui/core/styles";
 import Navbar from "./Navbar";
 import "../styles/forms.scss";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+
 import { setUser } from "../redux/users";
 import Loading from "../commons/Loading";
 
@@ -76,6 +77,9 @@ const Login = ({ classes }) => {
                 >
                   LOG IN
                 </Button>
+                <Link to="/recoverPass" className="recover-pass">
+                  <span>I forgot my password</span>
+                </Link>
               </form>
             </div>
           </div>

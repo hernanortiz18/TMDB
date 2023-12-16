@@ -1,14 +1,13 @@
 import { CircularProgress } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 
-const styles = (theme) => ({
+const styles = () => ({
   loading: {
     "& > *": {
-      display: "flex",
-      justifyContent: "center",
-      margin: "auto",
-      width: "70px",
-      heigth: "70px",
+      display: "block",
+      position: "fixed",
+      width: "50px",
+      heigth: "50px",
     },
   },
 });

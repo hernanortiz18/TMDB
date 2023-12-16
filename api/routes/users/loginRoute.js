@@ -10,12 +10,14 @@ loginRoute.post("/", (req, res) => {
     user.passwordValidate(password).then((isValid) => {
       if (!isValid) return res.sendStatus(401);
       const payload = {
+        id: user.id,
         name: user.name,
         lastName: user.lastName,
         email: user.email,
       };
       const token = generateToken(payload);
-      res.status(202).cookie("token", token).send(payload);
+      res.cookie("token", token);
+      res.status(202).send(payload);
     });
   });
 });

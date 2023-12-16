@@ -1,0 +1,29 @@
+.grill-container {
+  margin: 20px 0;
+  width: 97.2vw;
+}
+
+.card-container {
+  margin: 5px;
+  justify-content: center;
+  align-items: center;
+  .card-image {
+    max-width: 17vw;
+    align-content: center;
+    border-radius: 15px;
+    min-height: 100%;
+    margin: auto;
+  }
+  p {
+    width: 100%;
+    text-align: center;
+    font-size: 1.2em;
+    font-style: italic;
+    // border-bottom: solid 1px #95000e;
+  }
+}
+
+.movieCard {
+  align-items: center;
+  width: 95%;
+}

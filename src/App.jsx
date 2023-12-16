@@ -3,7 +3,6 @@ import React, { useEffect } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Register from "./components/Register";
 import Login from "./components/Login";
-
 import Home from "./components/Home";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,11 +14,15 @@ const App = () => {
   const user = useSelector((state) => state.user);
 
   useEffect(() => {
+    dispatch(setLoading(false));
     axios
       .get("http://localhost:8080/api/users/me", { withCredentials: true })
       .then((res) => dispatch(setUser(res.data)))
       .then(() => dispatch(setLoading(true)))
-      .catch(() => console.log("Please log in with user acount"));
+      .catch(() => {
+        dispatch(setLoading(true));
+        console.log("Please log in with user acount");
+      });
   }, []);
 
   return (

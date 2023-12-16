@@ -1,13 +1,20 @@
 const express = require("express");
 const routerMovies = express.Router();
 const axios = require("axios");
-const apiKey = "3bf84b63cc8ea1c1d15a4a65475f2a4c";
-const apiURL = "https://api.themoviedb.org/3";
+require("dotenv").config();
 
+const apiURL = process.env.API_URL;
+const apiKey = process.env.API_KEY;
+
+routerMovies.get("/trending", (req, res) => {
+  axios
+    .get(`${apiURL}/trending/movie/week`, { params: { api_key: apiKey } })
+    .then((movies) => res.status(200).send(movies.data.results));
+});
 routerMovies.get("/", (req, res) => {
   axios
     .get(`${apiURL}/discover/movie`, { params: { api_key: apiKey } })
-    .then((user) => res.send(user.data.results));
+    .then((movies) => res.send(movies.data.results));
 });
 
 module.exports = routerMovies;
