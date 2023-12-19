@@ -4,6 +4,7 @@ import { userReducer } from "./users";
 import { loadingReducer } from "./loading";
 import { searchReducer } from "./search";
 import { readyReducer } from "./ready";
+import { recoverReducer } from "./recover";
 
 const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ const store = configureStore({
     loading: loadingReducer,
     searchResult: searchReducer,
     ready: readyReducer,
+    recover: recoverReducer,
   },
 });
 

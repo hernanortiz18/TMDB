@@ -4,7 +4,7 @@ import Grill from "../commons/Grill";
 import Navbar from "./Navbar";
 import "../styles/general.scss";
 
-const Movies = () => {
+const TvShows = () => {
   const [data, setData] = useState([]);
 
   const options = {
@@ -18,9 +18,8 @@ const Movies = () => {
 
   useEffect(() => {
     axios
-      .get("https://api.themoviedb.org/3/movie/popular", options)
+      .get("https://api.themoviedb.org/3/tv/popular", options)
       .then(function (response) {
-        console.log(response.data);
         setData(response.data.results);
       })
       .catch(function (error) {
@@ -36,4 +35,4 @@ const Movies = () => {
   );
 };
 
-export default Movies;
+export default TvShows;

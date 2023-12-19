@@ -11,7 +11,6 @@ import {
   Toolbar,
 } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
-
 import axios from "axios";
 import { setSearchResult } from "../redux/search";
 import { setLoading } from "../redux/loading";
@@ -53,9 +52,7 @@ const Navbar = ({ classes }) => {
   const loading = useSelector((state) => state.loading);
   const searchResult = useSelector((state) => state.search);
   const [title, setTitle] = useState("");
-  const [year, setYear] = useState("");
   const [filter, setFilter] = useState(false);
-  const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -64,32 +61,9 @@ const Navbar = ({ classes }) => {
     setFilter(!filter);
   };
 
-  const handleYear = (e) => {
-    e.preventDefault();
-    setYear(e.target.value);
-    if (e.target.value !== "") {
-      const params = new URLSearchParams(searchParams);
-      params.set(e.target.name, e.target.value);
-      setSearchParams(params);
-    } else {
-      const params = new URLSearchParams(searchParams);
-      params.delete(e.target.name);
-      setSearchParams(params);
-    }
-  };
-
   const handleTitle = (e) => {
     e.preventDefault();
     setTitle(e.target.value);
-    if (e.target.value !== "") {
-      const params = new URLSearchParams(searchParams);
-      params.set(e.target.name, e.target.value);
-      setSearchParams(params);
-    } else {
-      const params = new URLSearchParams(searchParams);
-      params.delete(e.target.name);
-      setSearchParams(params);
-    }
   };
 
   const handleLogout = (e) => {
@@ -111,10 +85,15 @@ const Navbar = ({ classes }) => {
     e.preventDefault();
     setLoading(false);
     axios
-      .get(`http://localhost:8080/api/search?${searchParams}`)
-      .then((result) => dispatch(setSearchResult(result.data)))
+      .get(`http://localhost:8080/api/search`, {
+        params: {
+          title,
+        },
+      })
+      .then((result) => dispatch(setSearchResult(result)))
+      .then(() => console.log(searchResult))
       .then(() => setLoading(true))
-      .then(() => navigate(`/search/${searchParams}`));
+      .then(() => navigate(`/search`));
   };
 
   return (
@@ -126,7 +105,7 @@ const Navbar = ({ classes }) => {
           </Link>
           <form onSubmit={submitSearch}>
             <TextField
-              id="standar-basic-seach"
+              id="standar-basic-title"
               label="TITLE"
               autoComplete="off"
               className={classes.searchTitle}
@@ -134,16 +113,6 @@ const Navbar = ({ classes }) => {
               value={title}
               name="title"
               onChange={handleTitle}
-            />
-            <TextField
-              id="standar-basic-seach"
-              label="YEAR"
-              autoComplete="off"
-              className={classes.searchYear}
-              type="text"
-              value={year}
-              name="year"
-              onChange={handleYear}
               InputProps={{
                 endAdornment: (
                   <>
@@ -161,8 +130,17 @@ const Navbar = ({ classes }) => {
             {user.email ? (
               <>
                 <Typography variant="h6">
-                  <Link to="/all" className={classes.linkContainer}>
-                    All
+                  <Link to="/favorites/shows" className={classes.linkContainer}>
+                    Favorites shows
+                  </Link>
+                </Typography>
+
+                <Typography variant="h6">
+                  <Link
+                    to="/favorites/movies"
+                    className={classes.linkContainer}
+                  >
+                    Favorites movies
                   </Link>
                 </Typography>
 
@@ -211,10 +189,6 @@ const Navbar = ({ classes }) => {
           </div>
         </Toolbar>
       </AppBar>
-      {/* <AppBar>
-        <Toolbar></Toolbar>
-      </AppBar>
-      {filter ? <></> : <></>} */}
     </>
   );
 };

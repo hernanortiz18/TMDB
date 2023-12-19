@@ -8,6 +8,9 @@ Favs.init(
     selectedFavId: {
       type: S.INTEGER,
     },
+    name: {
+      type: S.STRING,
+    },
   },
   { sequelize: db, modelName: "fav" }
 );
