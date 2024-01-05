@@ -6,6 +6,7 @@ import "../styles/general.scss";
 
 const TvShows = () => {
   const [data, setData] = useState([]);
+  const type = "tv";
 
   const options = {
     params: { language: "en-US", page: "1" },
@@ -30,7 +31,7 @@ const TvShows = () => {
   return (
     <div className="home-container">
       <Navbar />
-      <Grill data={data} />
+      <Grill data={data} type={type} />
     </div>
   );
 };

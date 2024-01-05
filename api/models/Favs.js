@@ -8,7 +8,7 @@ Favs.init(
     selectedFavId: {
       type: S.INTEGER,
     },
-    name: {
+    type: {
       type: S.STRING,
     },
   },

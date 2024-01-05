@@ -6,12 +6,14 @@ import { useSelector } from "react-redux";
 import { setReady } from "../redux/ready";
 import { useDispatch } from "react-redux";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Favorites = ({ type }) => {
   const dispatch = useDispatch();
   const [myFavs, setMyFavs] = useState([]);
   const user = useSelector((state) => state.user);
   const ready = useSelector((state) => state.ready);
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(setReady(false));
@@ -23,14 +25,14 @@ const Favorites = ({ type }) => {
         setMyFavs(res.data);
       })
       .then(() => dispatch(setReady(true)));
-  }, []);
+  }, [navigate]);
 
   return (
     <>
       {ready ? (
         <div className="home-container">
           <Navbar />
-          <Grill data={myFavs} />
+          <Grill data={myFavs} type={type} />
         </div>
       ) : (
         <></>

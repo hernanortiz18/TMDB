@@ -6,6 +6,7 @@ import "../styles/general.scss";
 
 const Movies = () => {
   const [data, setData] = useState([]);
+  const type = "movie";
 
   const options = {
     params: { language: "en-US", page: "1" },
@@ -31,7 +32,7 @@ const Movies = () => {
   return (
     <div className="home-container">
       <Navbar />
-      <Grill data={data} />
+      <Grill data={data} type={type} />
     </div>
   );
 };

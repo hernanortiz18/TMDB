@@ -30,9 +30,9 @@ userRouter.put("/updatePass", (req, res) => {
   const { password } = req.body;
   User.update(
     {
-      email,
+      password,
     },
-    { where: { email }, returning: true, plain: "text" }
+    { where: { email }, returning: true }
   )
     .then(([rows, user]) => {
       res.status(201).send(user);

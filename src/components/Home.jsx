@@ -50,13 +50,13 @@ const Home = () => {
         {ready ? (
           <div className="home-container">
             <Typography variant="h3">MOVIES</Typography>
-            <Slick items={allMovies} />
+            <Slick items={allMovies} type={"movie"} />
             <Typography variant="h3">TV SHOWS</Typography>
-            <Slick items={allTv} />
+            <Slick items={allTv} type={"tv"} />
             <Typography variant="h3">TRENDING MOVIES</Typography>
-            <Slick items={moviesTrending} />
+            <Slick items={moviesTrending} type={"movie"} />
             <Typography variant="h3">TRENDING TV SHOWS</Typography>
-            <Slick items={tvShowTrending} />
+            <Slick items={tvShowTrending} type={"tv"} />
           </div>
         ) : (
           <Loading />

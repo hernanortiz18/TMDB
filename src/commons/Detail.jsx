@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setReady } from "../redux/ready";
 import Navbar from "../components/Navbar";
 import axios from "axios";
 import "../styles/detail.scss";
+import image from "../assets/support-image.jpg";
 
 const Detail = () => {
-  const { id } = useParams();
+  const { id, type } = useParams();
   const [selected, setSelected] = useState({});
   const [ranked, setRating] = useState("0");
   const [audiovisual_production_Id, setAudiovisual_production_Id] = useState(0);
@@ -20,7 +21,7 @@ const Detail = () => {
   useEffect(() => {
     dispatch(setReady(false));
     axios
-      .get(`http://localhost:8080/api/${id}`)
+      .get(`http://localhost:8080/api/${type}/${id}`)
       .then((res) => {
         setSelected(res.data);
         return res.data.id;
@@ -38,15 +39,14 @@ const Detail = () => {
           })
           .then((res) => setRating(res.data.ranked))
           .then(() => dispatch(setReady(true)));
-      });
-  }, []);
-
-  useEffect(() => {
-    axios
-      .get(`http://localhost:8080/api/favs/${id}`, {
-        authorUserId: user.id,
       })
-      .then((res) => (res ? setFav(true) : setFav(false)));
+      .catch(() => {
+        axios
+          .get(`http://localhost:8080/api/favs/${id}`, {
+            authorUserId: user.id,
+          })
+          .then((res) => (res ? setFav(true) : setFav(false)));
+      });
   }, []);
 
   const handleRating = (e) => {
@@ -71,7 +71,7 @@ const Detail = () => {
         .post("http://localhost:8080/api/favRegister", {
           authorUserId: user.id,
           selectedFavId: id,
-          name: selected.title,
+          type: type,
         })
         .then(() => setFav(!fav));
     } else {
@@ -96,12 +96,13 @@ const Detail = () => {
               selected.backdrop_path
                 ? selected.backdrop_path
                 : selected.poster_path
+            }? || ${image}
             }`}
             alt={selected.title}
             className="detail-image"
           />
           <div className="selected-info">
-            <h1>{selected.title}</h1>
+            <h1>{selected.title ? selected.title : selected.name}</h1>
             <h4>Description</h4>
             <p>{selected.overview}</p>
             <br />

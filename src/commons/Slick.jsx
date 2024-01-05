@@ -5,9 +5,7 @@ import Slider from "react-slick";
 import CardMovie from "./CardMovie";
 import "../styles/card.scss";
 
-const Slick = ({ items }) => {
-  console.log("ITEM QUE SE ENVIAN A LA CARDDDDDD", items);
-
+const Slick = ({ items, type }) => {
   const settings = {
     dots: true,
     infinite: true,
@@ -24,7 +22,7 @@ const Slick = ({ items }) => {
         {items.map((item) => (
           <div className="gridCard" key={item.id}>
             <div>
-              <CardMovie item={item} />
+              <CardMovie item={item} type={type} />
               <br />
             </div>
           </div>

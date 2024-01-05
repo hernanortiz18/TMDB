@@ -2,10 +2,10 @@ import React from "react";
 import "../styles/card.scss";
 import { useNavigate } from "react-router-dom";
 
-const CardMovie = ({ item }) => {
+const CardMovie = ({ item, type }) => {
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate(`/detail/${item.id}`);
+    navigate(`/detail/${type}/${item.id}`);
   };
 
   return (
